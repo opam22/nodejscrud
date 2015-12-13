@@ -1,0 +1,30 @@
+{
+  "name": "nodejscrud",
+  "version": "1.0.0",
+  "description": "a simple crud using node.js and express",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opam22/nodejscrud.git"
+  },
+  "keywords": [
+    "nodejscrud"
+  ],
+  "author": "Pramesti Hatta K.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opam22/nodejscrud/issues"
+  },
+  "homepage": "https://github.com/opam22/nodejscrud#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-myconnection": "^1.0.4",
+    "morgan": "^1.6.1",
+    "mysql": "^2.9.0"
+  }
+}

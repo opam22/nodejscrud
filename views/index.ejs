@@ -1,0 +1,39 @@
+<%- include layouts/header.ejs %>
+
+<div class="container">
+	<h1><%- tagline %></h1>
+
+	<br>
+	<a href="/add" class="btn btn-primary">Add Student</a>
+	<br>
+	<br>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Hobby</th>
+				<th colspan="2">Options</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% students.forEach(function (student) { %>
+				<tr>
+					<td><%= student.name %></td>
+					<td><%= student.age %></td>
+					<td><%= student.hobby %></td>
+					<td>
+						<a href="/edit/student/<%= student.id %>" class="btn btn-success">EDIT</a>
+					</td>
+					<td>
+						<a href="/delete/student/<%= student.id %>" class="btn btn-danger">DELETE</a>
+					</td>
+				</tr>
+			<% }); %>
+		</tbody>
+	</table>
+</div>
+
+<%- include layouts/footer.ejs %>
