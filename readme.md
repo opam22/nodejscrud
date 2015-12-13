@@ -6,7 +6,8 @@ Simple CRUD using Node.js v4.2.1, Express.js v4.13.3 and MySQL.
 	npm install
 
 ## Configuration Database
-
+		
+		//app.js
         host: 'localhost',
         user: 'root',
         password : '',
