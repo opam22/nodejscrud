@@ -7,13 +7,15 @@ exports.add = function (req, res) {
 exports.store = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
+	var inputFile = JSON.parse(JSON.stringify(req.file));
 
 	req.getConnection(function (err, connection) {
 
 		var data = {
 			name: input.name,
 			age: input.age,
-			hobby: input.hobby
+			hobby: input.hobby,
+			photo: inputFile.filename
 		};
 
 		var query = connection.query("INSERT INTO students SET ? ", data, function (err, rows) {

@@ -14,6 +14,7 @@
 				<th>Name</th>
 				<th>Age</th>
 				<th>Hobby</th>
+				<th>Photo</th>
 				<th colspan="2">Options</th>
 			</tr>
 		</thead>
@@ -24,6 +25,7 @@
 					<td><%= student.name %></td>
 					<td><%= student.age %></td>
 					<td><%= student.hobby %></td>
+					<td><img src="/uploads/<%= student.photo %>" width="100px" height="100px" class="img img-responsive"></td>
 					<td>
 						<a href="/edit/student/<%= student.id %>" class="btn btn-success">EDIT</a>
 					</td>

@@ -3,8 +3,19 @@ var http = require('http');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var multer  = require('multer')
 
 var app = express();
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '_' + file.originalname)
+  }
+});
+var upload = multer({ storage: storage })
 
 
 //database setup
@@ -20,11 +31,6 @@ app.use(
 	}, 'pool')
 
 );
-
-
-//port setup
-app.set('port', process.env.PORT || 3333);
-
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -70,7 +76,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-
 //controllers
 var IndexController = require('./controllers/IndexController');
 var StudentController = require('./controllers/StudentController');
@@ -78,7 +83,8 @@ var StudentController = require('./controllers/StudentController');
 //your application routes
 app.get('/', IndexController.index);
 app.get('/add', StudentController.add);
-app.post('/store/student', StudentController.store);
+app.post('/store/student', upload.single('photo'), StudentController.store);
+
 app.get('/delete/student/:id', StudentController.destroy);
 app.get('/edit/student/:id', StudentController.edit);
 app.post('/update/student/:id', StudentController.update);
@@ -93,6 +99,9 @@ app.use(function(req, res, next) {
 
 
 //create HTTP server
-http.createServer(app).listen(app.get('port'), function () {
-	console.log('Express server listening on port ' + app.get('port'));
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('HTTP server listening at http://localhost:%s', port);
 });
