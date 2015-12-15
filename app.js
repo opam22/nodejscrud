@@ -4,6 +4,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var multer  = require('multer')
+var connection = require('express-myconnection');
+var mysql = require('mysql');
 
 var app = express();
 
@@ -25,21 +27,6 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage })
 
-
-//database setup
-var connection = require('express-myconnection');
-var mysql = require('mysql');
-app.use(
-
-	connection(mysql, {
-		host: 'localhost',
-		user: 'root',
-		password: '',
-		database: 'nodejscrud'
-	}, 'pool')
-
-);
-
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -58,6 +45,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //static path
 app.use(express.static(path.join(__dirname, 'public')));
 
+//database setup
+require('./config/database.js')(app, connection, mysql); // load our database setup and pass our app, connection and mysql
+//routes setup
+require('./config/routes.js')(app, upload); //load our routes setup and pass our app and upload
 
 
 // error handlers
@@ -82,32 +73,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-// routes ======================================================================
-require('./config/routes.js')(app, upload); // load our routes 
-
-/*//controllers
-var IndexController = require('./controllers/IndexController');
-var StudentController = require('./controllers/StudentController');
-
-//your application routes
-app.get('/', IndexController.index);
-app.get('/add', StudentController.add);
-app.post('/store/student', upload.single('photo'), StudentController.store);
-
-app.get('/delete/student/:id', StudentController.destroy);
-app.get('/edit/student/:id', StudentController.edit);
-app.post('/update/student/:id', StudentController.update);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});*/
-
-
 
 //create HTTP server
 // launch ======================================================================

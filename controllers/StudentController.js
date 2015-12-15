@@ -1,10 +1,10 @@
-exports.add = function (req, res) {
+module.exports.add = function (req, res) {
 
 	res.render('add_student', {tagline: "Insert your new student"});
 
 };
 
-exports.store = function (req, res) {
+module.exports.store = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
 	var inputFile = JSON.parse(JSON.stringify(req.file));
@@ -31,7 +31,7 @@ exports.store = function (req, res) {
 
 };
 
-exports.edit = function (req, res) {
+module.exports.edit = function (req, res) {
 
 	var id = req.params.id;
 
@@ -50,7 +50,7 @@ exports.edit = function (req, res) {
 
 };
 
-exports.update = function (req, res) {
+module.exports.update = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
 	var id = req.params.id;
@@ -76,7 +76,7 @@ exports.update = function (req, res) {
 
 };
 
-exports.destroy = function (req, res) {
+module.exports.destroy = function (req, res) {
 
 	var id = req.params.id;
 
