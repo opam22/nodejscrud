@@ -7,6 +7,9 @@ var multer  = require('multer')
 
 var app = express();
 
+//port configuration
+var port = process.env.PORT || 8080;
+
 
 //multer configuration
 //destination path
@@ -81,7 +84,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-//controllers
+// routes ======================================================================
+require('./config/routes.js')(app, upload); // load our routes 
+
+/*//controllers
 var IndexController = require('./controllers/IndexController');
 var StudentController = require('./controllers/StudentController');
 
@@ -99,13 +105,11 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
+});*/
 
 
 
 //create HTTP server
-var server = app.listen(3003, function () {
-  var port = server.address().port;
-
-  console.log('HTTP server listening at http://localhost:%s', port);
-});
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
