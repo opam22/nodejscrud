@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2015 at 03:40 
+-- Generation Time: Dec 15, 2015 at 04:18 
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -30,17 +30,18 @@ CREATE TABLE IF NOT EXISTS `students` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `age` int(11) NOT NULL,
-  `hobby` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `hobby` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `age`, `hobby`) VALUES
-(1, 'Pramesti Hatta K.', 20, 'Write a bunch of code'),
-(2, 'Tatjiana Saphira', 19, 'Eat'),
-(3, 'Raline Shah', 20, 'Reading and Writing');
+INSERT INTO `students` (`id`, `name`, `age`, `hobby`, `photo`) VALUES
+(19, 'Pram', 20, 'You know what is the biggest problem about IT Company? because the owner has no background in IT Industry.', '1450096793625_images.jpg'),
+(20, 'Pramesti Hatta K.', 20, 'Write a Bunch of Code', '1450097357177_op.jpg'),
+(21, 'Tatjiana Saphira', 19, 'Make Pram smile', '1450097439943_5K-LJ3Lh.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -60,7 +61,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
