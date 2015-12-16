@@ -1,4 +1,18 @@
-Simple CRUD using Node.js v4.2.1, Express.js v4.13.3 and MySQL.
+Node.js web pack
+* node.js v4.2.3
+* express 4.13.3
+* express-myconnection
+* express-session
+* ejs
+* bcrypt-nodejs
+* body-parser
+* connect-flash
+* cookie-parser
+* morgan
+* multer
+* mysql
+* passport
+* passport-local 
 
 
 ## Installation
