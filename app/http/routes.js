@@ -17,8 +17,8 @@ module.exports = function (app, upload, passport) {
 
 
 	//application routes for authentication
-	app.get('/login', LoginController.index);
-	app.post('/login/do', passport.authenticate('local-login', {
+	app.get('/login', isGuest, LoginController.index);
+	app.post('/login/do', isGuest, passport.authenticate('local-login', {
             successRedirect : '/', // redirect to the secure INDEX section
             failureRedirect : '/login', // redirect back to the login page if there is an error
             failureFlash : true // allow flash messages
@@ -33,8 +33,8 @@ module.exports = function (app, upload, passport) {
             }
         res.redirect('/login');
     });
-	app.get('/register', RegisterController.index);
-	app.post('/register/do', passport.authenticate('local-register', {
+	app.get('/register', isGuest, RegisterController.index);
+	app.post('/register/do', isGuest, passport.authenticate('local-register', {
 		successRedirect : '/', // redirect to the secure profile section
 		failureRedirect : '/register', // redirect back to the signup page if there is an error
 		failureFlash: true
@@ -63,4 +63,15 @@ function isLoggedIn(req, res, next) {
 
 	// if they aren't redirect them to the home page
 	res.redirect('/login');
+}
+
+// route middleware to make sure
+function isGuest(req, res, next) {
+
+	// if user is not authenticated in the session, carry on
+	if (req.isUnauthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
 }
