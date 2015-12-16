@@ -9,11 +9,11 @@ module.exports = function (app, upload, passport) {
 
 	//your application routes
 	app.get('/', isLoggedIn, IndexController.index);
-	app.get('/add', StudentController.add);
-	app.post('/store/student', upload.single('photo'), StudentController.store);
-	app.get('/delete/student/:id', StudentController.destroy);
-	app.get('/edit/student/:id', StudentController.edit);
-	app.post('/update/student/:id', StudentController.update);
+	app.get('/add', isLoggedIn, StudentController.add);
+	app.post('/store/student', isLoggedIn, upload.single('photo'), StudentController.store);
+	app.get('/delete/student/:id', isLoggedIn, StudentController.destroy);
+	app.get('/edit/student/:id', isLoggedIn, StudentController.edit);
+	app.post('/update/student/:id', isLoggedIn, StudentController.update);
 
 
 	//application routes for authentication

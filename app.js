@@ -76,7 +76,7 @@ require('./app/http/routes.js')(app, upload, passport); //load our routes setup 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error/error', {
       message: err.message,
       error: err
     });
@@ -87,7 +87,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.render('error/error', {
     message: err.message,
     error: {}
   });

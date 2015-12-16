@@ -7,7 +7,7 @@ module.exports.index = function (req, res) {
 			if (err) {
 				console.log("Error : %s ", err);
 			}
-			res.render('index', {tagline: "Index page", students: rows});
+			res.render('index', {tagline: "Index page", students: rows, userAuth: req.user});
 
 		});
 

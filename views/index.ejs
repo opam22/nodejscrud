@@ -1,7 +1,8 @@
 <%- include layouts/header.ejs %>
 
 <div class="container">
-	<h1><%- tagline %></h1>
+	<h1><%= tagline %></h1>
+	<h2>Welcome <%= userAuth.username %></h2>
 
 	<br>
 	<a href="/add" class="btn btn-primary">Add Student</a>
