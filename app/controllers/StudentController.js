@@ -1,9 +1,18 @@
+/*
+used to handle add request to student page
+response render to add_student.ejs
+ */
 module.exports.add = function (req, res) {
 
 	res.render('add_student', {tagline: "Insert your new student"});
 
 };
 
+/*
+used to handle store request
+post data name, age, hobby, photo
+response render redirect to / (index)
+ */
 module.exports.store = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
@@ -31,6 +40,11 @@ module.exports.store = function (req, res) {
 
 };
 
+/*
+used to handle edit request to student page
+get data from students table
+response render to edit_student.ejs
+ */
 module.exports.edit = function (req, res) {
 
 	var id = req.params.id;
@@ -50,6 +64,12 @@ module.exports.edit = function (req, res) {
 
 };
 
+/*
+used to handle update request
+get id
+post name, age, hobby
+response render redirect to / (index)
+ */
 module.exports.update = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
@@ -76,6 +96,11 @@ module.exports.update = function (req, res) {
 
 };
 
+/*
+used to handle destroy request
+get id
+response render redirect to / (index)
+ */
 module.exports.destroy = function (req, res) {
 
 	var id = req.params.id;

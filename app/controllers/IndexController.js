@@ -1,3 +1,8 @@
+/*
+used to handle index request
+get data from students table
+response render to index.ejs
+ */
 module.exports.index = function (req, res) {
 
 	req.getConnection(function (err, connection) {
