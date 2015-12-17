@@ -34,14 +34,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   `photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `name`, `age`, `hobby`, `photo`) VALUES
-(19, 'Pram', 20, 'You know what is the biggest problem about IT Company? because the owner has no background in IT Industry.', '1450096793625_images.jpg'),
-(20, 'Pramesti Hatta K.', 20, 'Write a Bunch of Code', '1450097357177_op.jpg'),
-(21, 'Tatjiana Saphira', 19, 'Make Pram smile', '1450097439943_5K-LJ3Lh.jpeg');
 
 -- --------------------------------------------------------
 
@@ -55,13 +47,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(120) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(17, 'opam22', '$2a$10$6OINuDE1BbhpLxmLOxR.P.O0j4A0EQ0dj5IYTiGBoSCK1VwR6hMAm'),
-(18, 'pram', '$2a$10$HQzBYh2QnOWVbE3ELK7xPOpPO4Zoy695Pd75kBN0qJji/.5mQTJWq');
 
 --
 -- Indexes for dumped tables
