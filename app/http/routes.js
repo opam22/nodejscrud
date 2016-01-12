@@ -8,12 +8,14 @@ var LoginController = require('../controllers/LoginController');
 module.exports = function (app, upload, passport) {
 
 	//your application routes
-	app.get('/', isLoggedIn, IndexController.index);
-	app.get('/add', isLoggedIn, StudentController.add);
-	app.post('/store/student', isLoggedIn, upload.single('photo'), StudentController.store);
-	app.get('/delete/student/:id', isLoggedIn, StudentController.destroy);
-	app.get('/edit/student/:id', isLoggedIn, StudentController.edit);
-	app.post('/update/student/:id', isLoggedIn, StudentController.update);
+	app.get('/', isLoggedIn, isAdmin,IndexController.index);
+	app.get('/add', isLoggedIn, isAdmin, StudentController.add);
+	app.post('/store/student', isLoggedIn, isAdmin, upload.single('photo'), StudentController.store);
+	app.get('/delete/student/:id', isLoggedIn, isAdmin, StudentController.destroy);
+	app.get('/edit/student/:id', isLoggedIn, isAdmin, StudentController.edit);
+	app.post('/update/student/:id', isLoggedIn, isAdmin, StudentController.update);
+	app.get('/edit/photo/:id', isLoggedIn, isAdmin, StudentController.editPhoto);
+	app.post('/update/photo/:id', isLoggedIn, isAdmin, upload.single('photo'), StudentController.updatePhoto);
 
 
 	//application routes for authentication
@@ -24,7 +26,6 @@ module.exports = function (app, upload, passport) {
             failureFlash : true // allow flash messages
 		}),
         function(req, res) {
-            console.log("hello");
 
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
@@ -33,12 +34,16 @@ module.exports = function (app, upload, passport) {
             }
         res.redirect('/login');
     });
+
+
 	app.get('/register', isGuest, RegisterController.index);
 	app.post('/register/do', isGuest, passport.authenticate('local-register', {
 		successRedirect : '/', // redirect to the secure profile section
 		failureRedirect : '/register', // redirect back to the signup page if there is an error
 		failureFlash: true
 	}));
+
+	
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/login');
@@ -53,6 +58,10 @@ module.exports = function (app, upload, passport) {
 	});
 
 }
+
+
+
+
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
@@ -74,4 +83,14 @@ function isGuest(req, res, next) {
 
 	// if they aren't redirect them to the home page
 	res.redirect('/');
+}
+
+function isAdmin (req, res, next) {
+	if (req.user.level == 1)
+		return next();
+
+
+	req.logout();
+	res.render('error/permission', {message: 'You dont have any permission'});
+
 }

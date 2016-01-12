@@ -8,6 +8,8 @@ module.exports.add = function (req, res) {
 
 };
 
+
+
 /*
 used to handle store request
 post data name, age, hobby, photo
@@ -16,7 +18,12 @@ response render redirect to / (index)
 module.exports.store = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
-	var inputFile = JSON.parse(JSON.stringify(req.file));
+
+	if (req.file != undefined) {
+		var inputFile = JSON.parse(JSON.stringify(req.file));
+	} else {
+		var inputFile = { filename: 'default.jpg' };
+	}
 
 	req.getConnection(function (err, connection) {
 
@@ -40,8 +47,10 @@ module.exports.store = function (req, res) {
 
 };
 
+
+
 /*
-used to handle edit request to student page
+used to handle edit request to edit student page
 get data from students table
 response render to edit_student.ejs
  */
@@ -64,6 +73,8 @@ module.exports.edit = function (req, res) {
 
 };
 
+
+
 /*
 used to handle update request
 get id
@@ -73,7 +84,7 @@ response render redirect to / (index)
 module.exports.update = function (req, res) {
 
 	var input = JSON.parse(JSON.stringify(req.body));
-	var id = req.params.id;
+	var user_id = req.params.id;
 
 	req.getConnection(function (err, connection) {
 
@@ -83,7 +94,7 @@ module.exports.update = function (req, res) {
 			hobby: input.hobby
 		};
 
-		var query = connection.query("UPDATE students SET ? WHERE id = ? ", [data, id], function (err, rows) {
+		var query = connection.query("UPDATE students SET ? WHERE id = ? ", [data, user_id], function (err, rows) {
 
 			if (err) {
 				console.log("Error : %s ", err);
@@ -95,6 +106,53 @@ module.exports.update = function (req, res) {
 	});
 
 };
+
+
+/*
+used to handle edit request to edit
+get data from students table
+response render to edit_student.ejs
+ */
+module.exports.editPhoto = function (req, res) {
+
+	var id = req.params.id;
+
+	res.render('edit_photo', {tagline: "Edit photo", user_id: id});
+
+}
+
+
+/*
+used to handle update photo
+ */
+module.exports.updatePhoto = function(req, res) {
+
+	var user_id = req.params.id;
+
+	if (req.file != undefined) {
+		var inputFile = JSON.parse(JSON.stringify(req.file));
+	} else {
+		var inputFile = { filename: 'default.jpg' };
+	}
+
+	req.getConnection(function (err, connection) {
+
+		var data = {
+			photo: inputFile.filename
+		};
+
+		var query = connection.query("UPDATE students SET ? WHERE id = ? ", [data, user_id], function (err, rows) {
+
+			if (err) {
+				console.log("Error : %s ", err);
+			}
+			res.redirect('/');
+
+		});
+
+	});
+
+}
 
 /*
 used to handle destroy request
